@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Rishabh ❤️ Prajal</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+    margin:0;
+    height:100vh;
+    background:linear-gradient(135deg,#ff4d6d,#ff9aa2);
+    font-family:'Poppins',sans-serif;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+    color:white;
+}
+
+.container{
+    text-align:center;
+    width:92%;
+    z-index:2;
+}
+
+h1{
+    font-size:1.7rem;
+    margin-bottom:10px;
+}
+
+.question{
+    font-size:1.35rem;
+    margin:18px 0;
+}
+
+.buttons{
+    position:relative;
+    height:120px;
+}
+
+button{
+    padding:14px 34px;
+    font-size:1.05rem;
+    border:none;
+    border-radius:40px;
+    position:absolute;
+    transition:0.3s;
+}
+
+#yes{
+    background:white;
+    color:#ff4d6d;
+    left:50%;
+    transform:translateX(-120%);
+}
+
+#no{
+    background:#ff1e56;
+    color:white;
+    left:50%;
+    transform:translateX(20%);
+}
+
+.emoji{
+    font-size:2rem;
+    margin-top:8px;
+    animation:pop 0.4s;
+}
+
+@keyframes pop{
+    from{transform:scale(0)}
+    to{transform:scale(1)}
+}
+
+.heart{
+    position:absolute;
+    bottom:-40px;
+    font-size:1.5rem;
+    animation:float 8s linear infinite;
+    opacity:0.7;
+}
+
+@keyframes float{
+    from{transform:translateY(0)}
+    to{transform:translateY(-120vh)}
+}
+
+.teddy{
+    margin-top:15px;
+    background:rgba(255,255,255,0.18);
+    padding:16px;
+    border-radius:18px;
+    font-size:1.1rem;
+}
+
+.fullscreen{
+    position:fixed;
+    inset:0;
+    background:#ff4d6d;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    font-size:3.5rem;
+    animation:zoom 1.5s forwards;
+    text-align:center;
+}
+
+@keyframes zoom{
+    from{transform:scale(0)}
+    to{transform:scale(1)}
+}
+</style>
+</head>
+
+<body>
+
+<!-- Romantic song -->
+<audio id="song">
+  <source src="https://docs.google.com/uc?export=download&id=1nQpH9ZpYv_SAIYAARA_SAMPLE" type="audio/mpeg">
+</audio>
+
+<div class="container" id="app">
+    <h1>💖 Mera bacha wanna play YES or NO game ? 💖</h1>
+    <div class="question" id="question"></div>
+    <div class="emoji" id="emoji"></div>
+
+    <div class="buttons">
+        <button id="yes">YES 💕</button>
+        <button id="no">NO 💔</button>
+    </div>
+</div>
+
+<script>
+/* floating hearts */
+for(let i=0;i<25;i++){
+    let h=document.createElement("div");
+    h.className="heart";
+    h.innerText="💖";
+    h.style.left=Math.random()*100+"vw";
+    h.style.animationDuration=6+Math.random()*5+"s";
+    document.body.appendChild(h);
+}
+
+const questions=[
+"Do you think I am perfect for you, Prajal?",
+"You will be with me always and forever?",
+"Shall we marry this month?",
+"Can you accept my apology this first and last time?",
+"After this last question, can we talk like we talk?",
+"Do you want to hug and kiss me right now?"
+];
+
+let index=0;
+let noCount=0;
+
+const q=document.getElementById("question");
+const emoji=document.getElementById("emoji");
+const noBtn=document.getElementById("no");
+const yesBtn=document.getElementById("yes");
+const song=document.getElementById("song");
+
+q.innerText=questions[index];
+
+function moveNo(){
+    noCount++;
+    emoji.innerText="😢💔";
+    if(noCount<4){
+        noBtn.style.left=Math.random()*70+"%";
+        noBtn.style.top=Math.random()*60+"px";
+    }else{
+        noBtn.style.left=yesBtn.style.left;
+        noBtn.style.top=yesBtn.style.top;
+    }
+}
+
+noBtn.addEventListener("click",moveNo);
+noBtn.addEventListener("mouseover",moveNo);
+noBtn.addEventListener("touchstart",moveNo);
+
+yesBtn.onclick=()=>{
+    emoji.innerText="";
+    noCount=0;
+
+    if(index===0){
+        song.play(); // song starts gently
+    }
+
+    index++;
+
+    if(index===3){
+        q.innerHTML=`
+        <div class="teddy">
+        🧸😭<br><br>
+        I hurted you & made you cry?<br><br>
+        I'm deeply <b>SORRY</b> with my whole heart to make my baby cry 💔<br><br>
+        That guilt still lives in my mind…<br>
+        I promise I’ll never put you in any situation that can hurt you in any way 💖
+        </div>`;
+        return;
+    }
+
+    if(index>=questions.length){
+        document.body.innerHTML=`
+        <div class="fullscreen">😘</div>
+        <div class="fullscreen" style="animation-delay:1.2s;">💋</div>
+        <div class="fullscreen" style="font-size:1.4rem;animation-delay:2.6s;">
+        I LOVE U very much Mera Bacha ❤️<br><br>
+        You are my world 🌍 my life 💖 my WIFE 💍<br><br>
+        <b>Rishabh + Prajal = 💖💖 hearts in 💖</b>
+        </div>`;
+        return;
+    }
+
+    q.innerText=questions[index];
+};
+</script>
+
+</body>
+</html>
